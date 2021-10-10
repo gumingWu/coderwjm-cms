@@ -4,7 +4,18 @@
     <router-link to="/about">About</router-link>
   </div>
   <router-view />
+  <hello-world></hello-world>
 </template>
+
+<script lang="ts">
+import HelloWorld from '@c/HelloWorld.vue'
+
+export default {
+  components: {
+    HelloWorld
+  }
+}
+</script>
 
 <style lang="less">
 #app {
