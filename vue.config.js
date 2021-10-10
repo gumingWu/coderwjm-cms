@@ -20,6 +20,9 @@ module.exports = {
   // 配置三
   chainWebpack: (config) => {
     const alias = config.resolve.alias
-    alias.set('@', path.resolve(__dirname, 'src')).set('@c', '@/components')
+    alias
+      .set('@', path.resolve(__dirname, 'src'))
+      .set('@c', '@/components')
+      .set('@v', '@/views')
   }
 }
