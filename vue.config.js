@@ -1,4 +1,6 @@
 const path = require('path')
+const Components = require('unplugin-vue-components/webpack')
+const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
 
 module.exports = {
   // 配置一
@@ -24,5 +26,12 @@ module.exports = {
       .set('@', path.resolve(__dirname, 'src'))
       .set('@c', '@/components')
       .set('@v', '@/views')
+  },
+  configureWebpack: {
+    plugins: [
+      Components({
+        resolvers: [ElementPlusResolver()]
+      })
+    ]
   }
 }
