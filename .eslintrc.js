@@ -17,6 +17,7 @@ module.exports = {
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    '@typescript-eslint/no-var-requires': 'off' // eslint使用require会报错，加上这个
+    '@typescript-eslint/no-var-requires': 'off', // eslint使用require会报错，加上这个
+    '@typescript-eslint/no-explicit-any': 'off'
   }
 }
