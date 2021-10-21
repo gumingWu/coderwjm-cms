@@ -2,6 +2,12 @@ const path = require('path')
 const Components = require('unplugin-vue-components/webpack')
 const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
 const DashboardPlugin = require('webpack-dashboard/plugin')
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
+
+const smp = new SpeedMeasurePlugin({
+  disable: process.env.NODE_ENV !== 'development', // 不知道为啥不行，后面研究，猜测是因为用了脚手架
+  outputFormat: 'human'
+})
 
 module.exports = {
   // 配置一
@@ -28,12 +34,12 @@ module.exports = {
       .set('@c', '@/components')
       .set('@v', '@/views')
   },
-  configureWebpack: {
+  configureWebpack: smp.wrap({
     plugins: [
       Components({
         resolvers: [ElementPlusResolver()]
       }),
       new DashboardPlugin()
     ]
-  }
+  })
 }
