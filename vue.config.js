@@ -1,6 +1,7 @@
 const path = require('path')
 const Components = require('unplugin-vue-components/webpack')
 const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
+const DashboardPlugin = require('webpack-dashboard/plugin')
 
 module.exports = {
   // 配置一
@@ -31,7 +32,8 @@ module.exports = {
     plugins: [
       Components({
         resolvers: [ElementPlusResolver()]
-      })
+      }),
+      new DashboardPlugin()
     ]
   }
 }
