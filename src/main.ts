@@ -4,6 +4,6 @@ import router from './router'
 import store from './store'
 import globalRegister from '@/global'
 // import '@/service/axios_demo'
-import '@/service/request_demo'
+import './service'
 
 createApp(App).use(store).use(router).use(globalRegister).mount('#app')

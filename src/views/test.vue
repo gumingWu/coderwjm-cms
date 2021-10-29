@@ -5,10 +5,9 @@
   <el-input></el-input>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 
-console.log('hhhhhh')
 const message = ref('im message')
 </script>
 
