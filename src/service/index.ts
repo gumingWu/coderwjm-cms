@@ -1,4 +1,6 @@
 import Request from './request'
+import type { AxiosRequestConfig, AxiosResponse } from 'axios'
+// import type { ResponseType, LoginResponse } from './request/type'
 
 const request = new Request({
   baseURL: '/api'
@@ -11,17 +13,44 @@ request.instance
     password: '123456'
   })
   .then((res: any) => {
-    console.log(res)
+    console.log('普通request', res)
 
     const token = res.data.data.token
 
-    request.instance
+    request
       .get('/test', {
         headers: {
           Authorization: token
         }
       })
-      .then((res1) => {
-        console.log(res1)
+      .then((res) => {
+        console.log('普通request', res)
       })
+  })
+
+const request2 = new Request({
+  baseURL: '/api',
+  interceptors: {
+    requestInterceptor: (config: AxiosRequestConfig) => {
+      console.log('请求2，加上当前请求的拦截')
+      return config
+    },
+    responseInterceptor: (res: AxiosResponse<any>) => {
+      res.data['request2'] = '哈哈哈'
+      return res
+    }
+  }
+})
+
+request2
+  .post('/login', {
+    data: {
+      name: 'coderwhy',
+      password: '123456'
+    }
+  })
+  .then((res) => {
+    console.log('请求2，加上当前请求的拦截', res)
+
+    // TODO 加上返回类型定义
   })
