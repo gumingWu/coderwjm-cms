@@ -3,7 +3,6 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import globalRegister from '@/global'
-// import '@/service/axios_demo'
-import '@/service'
+import 'normalize.css'
 
 createApp(App).use(store).use(router).use(globalRegister).mount('#app')

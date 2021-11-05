@@ -36,6 +36,15 @@ module.exports = {
       .set('@v', '@/views')
   },
   configureWebpack: smp.wrap({
+    module: {
+      rules: [
+        {
+          test: /\.mjs$/,
+          include: /node_modules/,
+          type: 'javascript/auto'
+        }
+      ]
+    },
     plugins: [
       Components({
         resolvers: [ElementPlusResolver()]

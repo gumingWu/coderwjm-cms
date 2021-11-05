@@ -2,9 +2,6 @@ import Request from './request'
 import type { RequestConfig } from './request/type'
 const { VUE_APP_BASE_URL, VUE_APP_TIMEOUT } = process.env
 
-import type { AxiosResponse } from 'axios'
-import type { Response, Login } from '@/service/request/type'
-
 const request = new Request({
   baseURL: VUE_APP_BASE_URL,
   timeout: VUE_APP_TIMEOUT,
@@ -22,25 +19,27 @@ const request = new Request({
   }
 })
 
-request
-  .post<AxiosResponse<Response<Login>>>('/login', {
-    data: {
-      name: 'coderwhy',
-      password: '123456'
-    }
-  })
-  .then((res) => {
-    console.log(res)
+export default request
 
-    const token = res.data.data.token
+// request
+//   .post<AxiosResponse<Response<Login>>>('/login', {
+//     data: {
+//       name: 'coderwhy',
+//       password: '123456'
+//     }
+//   })
+//   .then((res) => {
+//     console.log(res)
 
-    request
-      .get<AxiosResponse>('/test', {
-        headers: {
-          Authorization: token
-        }
-      })
-      .then((res) => {
-        console.log(res)
-      })
-  })
+//     const token = res.data.data.token
+
+//     request
+//       .get<AxiosResponse>('/test', {
+//         headers: {
+//           Authorization: token
+//         }
+//       })
+//       .then((res) => {
+//         console.log(res)
+//       })
+//   })

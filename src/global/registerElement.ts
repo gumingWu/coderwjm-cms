@@ -1,7 +1,14 @@
 import { App } from 'vue'
-import { ElButton, ElInput } from 'element-plus'
+import {
+  ElButton,
+  ElInput,
+  ElCard,
+  ElForm,
+  ElFormItem,
+  ElCheckbox
+} from 'element-plus'
 
-const components = [ElButton, ElInput]
+const components = [ElButton, ElInput, ElCard, ElForm, ElFormItem, ElCheckbox]
 
 export default {
   install(app: App): void {
