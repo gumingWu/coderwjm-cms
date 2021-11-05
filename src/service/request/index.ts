@@ -1,96 +1,82 @@
 import axios from 'axios'
-import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
-import type { RequestOptionsType } from './type'
+import type { AxiosInstance, Method } from 'axios'
+import type { RequestConfig } from './type'
 
 class Request {
   instance: AxiosInstance
 
-  constructor(options: RequestOptionsType) {
-    this.instance = axios.create(options)
+  constructor(config: RequestConfig) {
+    this.instance = axios.create(config)
 
-    // 使用config中的interceptor，每个实例单独的拦截器
+    // 设置每个请求实例的拦截器
     this.instance.interceptors.request.use(
-      options.interceptors?.requestInterceptor,
-      options.interceptors?.requestInterceptorCatch
+      config.interceptors?.requestInterceptor,
+      config.interceptors?.requestInterceptorCatch
     )
     this.instance.interceptors.response.use(
-      options.interceptors?.responseInterceptor,
-      options.interceptors?.responseInterceptorCatch
+      config.interceptors?.responseInterceptor,
+      config.interceptors?.responseInterceptorCatch
     )
 
-    // 所有请求器实例都有的拦截器
+    // 设置全部实例都有的拦截器
     this.instance.interceptors.request.use(
-      (config: AxiosRequestConfig) => {
+      (config) => {
+        console.log('全局请求拦截')
+
         return config
       },
-      (err: any) => {
-        console.log(err)
+      (err) => {
+        return err
       }
     )
     this.instance.interceptors.response.use(
-      (res: AxiosResponse) => {
+      (res) => {
+        console.log('全局响应拦截')
+
         return res
       },
-      (err: any) => {
-        console.log(err)
+      (err) => {
+        return err
       }
     )
   }
 
-  request(config: RequestOptionsType) {
+  request<T>(
+    url: string,
+    method: Method,
+    config: RequestConfig<T>
+  ): Promise<T> {
     return new Promise((resolve, reject) => {
-      // 这是单独的请求配置的拦截器
-      this.instance.interceptors.request.use(
-        config.interceptors?.requestInterceptor,
-        config.interceptors?.requestInterceptorCatch
-      )
-      this.instance.interceptors.response.use(
-        config.interceptors?.responseInterceptor,
-        config.interceptors?.responseInterceptorCatch
-      )
-
       this.instance
-        .request(config)
+        .request<any, T>({
+          url,
+          method,
+          ...config
+        })
         .then((res) => {
           resolve(res)
         })
-        .then((err) => {
-          reject(err)
-          return err
+        .catch((e) => {
+          reject(e)
+          return e
         })
     })
   }
 
-  get(url: string, config: RequestOptionsType) {
-    return this.request({
-      url,
-      method: 'get',
-      ...config
-    })
+  get<T = any>(url: string, config: RequestConfig<T>): Promise<T> {
+    return this.request<T>(url, 'get', config)
   }
 
-  post(url: string, config: RequestOptionsType) {
-    return this.request({
-      url,
-      method: 'post',
-      ...config
-    })
+  post<T = any>(url: string, config: RequestConfig<T>): Promise<T> {
+    return this.request<T>(url, 'post', config)
   }
 
-  put(url: string, config: RequestOptionsType) {
-    return this.request({
-      url,
-      method: 'put',
-      ...config
-    })
+  put<T = any>(url: string, config: RequestConfig<T>): Promise<T> {
+    return this.request<T>(url, 'put', config)
   }
 
-  delete(url: string, config: RequestOptionsType) {
-    return this.request({
-      url,
-      method: 'delete',
-      ...config
-    })
+  delete<T = any>(url: string, config: RequestConfig<T>): Promise<T> {
+    return this.request<T>(url, 'delete', config)
   }
 }
 

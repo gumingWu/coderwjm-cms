@@ -3,6 +3,7 @@ const Components = require('unplugin-vue-components/webpack')
 const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
 const DashboardPlugin = require('webpack-dashboard/plugin')
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
+const { BACKEN } = process.env
 
 const smp = new SpeedMeasurePlugin({
   disable: process.env.NODE_ENV !== 'development', // 不知道为啥不行，后面研究，猜测是因为用了脚手架
@@ -46,7 +47,7 @@ module.exports = {
   devServer: {
     proxy: {
       '/api': {
-        target: 'http://152.136.185.210:5000',
+        target: BACKEN,
         pathRewrite: {
           '/api': ''
         },
