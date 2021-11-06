@@ -4,7 +4,7 @@ const { VUE_APP_BASE_URL, VUE_APP_TIMEOUT } = process.env
 
 const request = new Request({
   baseURL: VUE_APP_BASE_URL,
-  timeout: VUE_APP_TIMEOUT,
+  timeout: parseInt(VUE_APP_TIMEOUT as string),
   interceptors: {
     requestInterceptor(config: RequestConfig) {
       console.log('实例请求拦截器')

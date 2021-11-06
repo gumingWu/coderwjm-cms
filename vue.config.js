@@ -34,6 +34,7 @@ module.exports = {
       .set('@', path.resolve(__dirname, 'src'))
       .set('@c', '@/components')
       .set('@v', '@/views')
+      .set('@u', '@/utils')
   },
   configureWebpack: smp.wrap({
     module: {

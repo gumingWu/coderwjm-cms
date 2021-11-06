@@ -2,6 +2,7 @@ import type { AxiosRequestConfig, AxiosResponse } from 'axios'
 
 export interface RequestConfig<T = AxiosResponse> extends AxiosRequestConfig {
   interceptors?: RequestInterceptors<T>
+  showLoading?: boolean
 }
 
 export interface RequestInterceptors<T = AxiosResponse> {
@@ -9,15 +10,4 @@ export interface RequestInterceptors<T = AxiosResponse> {
   requestInterceptorCatch?: (err: any) => any
   responseInterceptor?: (res: T) => T
   responseInterceptorCatch?: (err: any) => any
-}
-
-export interface Response<T = any> {
-  code: string
-  data: T
-}
-
-export interface Login {
-  id: string
-  name: string
-  token: string
 }

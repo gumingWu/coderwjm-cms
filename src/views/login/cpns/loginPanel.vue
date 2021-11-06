@@ -1,17 +1,13 @@
 <template>
   <div class="login-panel">
-    <el-card shadow="hover">
+    <h2 class="login-panel-title">后台管理系统</h2>
+    <el-card class="login-panel-card" shadow="hover">
       <template #header> 账号登录 </template>
-      <el-form
-        ref="formRef"
-        :model="form"
-        label-width="60px"
-        label-position="left"
-      >
-        <el-form-item label="账号">
+      <el-form ref="formRef" :model="form" :rules="loginRules">
+        <el-form-item label="账号" prop="name">
           <el-input v-model="form.name" placeholder="请输入账号"></el-input>
         </el-form-item>
-        <el-form-item label="密码">
+        <el-form-item label="密码" prop="password">
           <el-input
             v-model="form.password"
             placeholder="请输入密码"
@@ -33,6 +29,7 @@
 import { ref, reactive } from 'vue'
 import { ElForm } from 'element-plus'
 import loginStore from '@/store/modules/login'
+import loginRules from '@u/validate/login'
 
 const form = reactive({
   name: '',
@@ -45,15 +42,25 @@ const formRef = ref<InstanceType<typeof ElForm>>()
 
 const store = loginStore()
 
-const loginBtn = async () => {
-  const res = await store.accountLogin({ ...form })
-  console.log('🚀 ~ file: loginPanel.vue ~ line 50 ~ loginBtn ~ res', res)
+const loginBtn = () => {
+  formRef.value?.validate(async (valid) => {
+    if (valid) {
+      console.log('验证成功')
+      const res = await store.accountLogin({ ...form })
+    } else {
+      console.log('验证失败')
+    }
+  })
 }
 </script>
 
 <style scoped lang="less">
 .login-panel {
   width: 30%;
+
+  &-title {
+    text-align: center;
+  }
 
   .login-btn-container {
     text-align: center;
