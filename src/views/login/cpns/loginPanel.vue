@@ -11,7 +11,7 @@
           <el-input
             v-model="form.password"
             placeholder="请输入密码"
-            type="password"
+            show-password
           ></el-input>
         </el-form-item>
         <el-checkbox v-model="isSavePwd" label="记住密码"></el-checkbox>
@@ -29,11 +29,12 @@
 import { ref, reactive } from 'vue'
 import { ElForm } from 'element-plus'
 import loginStore from '@/store/modules/login'
-import loginRules from '@u/validate/login'
+import loginRules from '@/utils/validate/login'
+import storage from '@/utils/storage'
 
 const form = reactive({
-  name: '',
-  password: ''
+  name: storage.get('name') || '',
+  password: storage.get('password') || ''
 })
 
 const isSavePwd = ref(false)
@@ -46,6 +47,17 @@ const loginBtn = () => {
   formRef.value?.validate(async (valid) => {
     if (valid) {
       console.log('验证成功')
+
+      // 1.判断是否需要保存账号密码
+      if (isSavePwd.value) {
+        storage.set('name', form.name)
+        storage.set('password', form.password)
+      } else {
+        storage.delete('name')
+        storage.delete('password')
+      }
+
+      // 2. 进行登录操作
       const res = await store.accountLogin({ ...form })
     } else {
       console.log('验证失败')
