@@ -28,7 +28,7 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
 import { ElForm } from 'element-plus'
-import loginStore from '@/store/modules/login'
+import userStore from '@/store/modules/user'
 import loginRules from '@/utils/validate/login'
 import storage from '@/utils/storage'
 
@@ -41,7 +41,7 @@ const isSavePwd = ref(false)
 
 const formRef = ref<InstanceType<typeof ElForm>>()
 
-const store = loginStore()
+const store = userStore()
 
 const loginBtn = () => {
   formRef.value?.validate(async (valid) => {

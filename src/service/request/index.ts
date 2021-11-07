@@ -4,6 +4,7 @@ import type { RequestConfig } from './type'
 import { ElLoading } from 'element-plus'
 import type { ILoadingInstance } from 'element-plus'
 const { VUE_APP_SHOWLOADING } = process.env
+import storage from '@/utils/storage'
 
 class Request {
   instance: AxiosInstance
@@ -35,6 +36,14 @@ class Request {
           })
         }
 
+        // 如果缓存中有token,则设置到header中
+        const token: string = storage.get('token')
+        if (token) {
+          config.headers = {
+            Authorization: token
+          }
+        }
+
         return config
       },
       (err) => {
@@ -44,7 +53,14 @@ class Request {
     this.instance.interceptors.response.use(
       (res) => {
         this.loading?.close()
-        return res
+
+        const { status, data } = res
+        if (status === 200) {
+          return data
+        } else {
+          alert('出错了:' + res.statusText)
+          return null
+        }
       },
       (err) => {
         this.loading?.close()
@@ -56,8 +72,12 @@ class Request {
   request<T>(
     url: string,
     method: Method,
-    config: RequestConfig<T>
+    config?: RequestConfig<T>
   ): Promise<T> {
+    if (config?.showLoading === false) {
+      this.showLoading = false
+    }
+
     return new Promise((resolve, reject) => {
       this.instance
         .request<any, T>({
@@ -75,7 +95,7 @@ class Request {
     })
   }
 
-  get<T = any>(url: string, config: RequestConfig<T>): Promise<T> {
+  get<T = any>(url: string, config?: RequestConfig<T>): Promise<T> {
     return this.request<T>(url, 'get', config)
   }
 
