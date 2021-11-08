@@ -3,15 +3,21 @@ import {
   getUserinfoById,
   getUserMenuByRoleId
 } from '@/service/user'
-import type { IAccount, IUserInfoResponse } from '@/service/user/type'
+import type {
+  IAccount,
+  IUserInfoResponse,
+  IMenuResponse
+} from '@/service/user/type'
 import { defineStore } from 'pinia'
+import router from '@/router'
 import storage from '@/utils/storage'
 
 export default defineStore('user', {
   state: () => {
     return {
       token: '',
-      userInfo: {}
+      userInfo: {},
+      userMenu: [] as any[] // ts默认初始化空数组为never[]，所以要转换成any[]
     }
   },
   actions: {
@@ -20,6 +26,9 @@ export default defineStore('user', {
     },
     setUserInfo(userinfo: IUserInfoResponse) {
       this.userInfo = userinfo
+    },
+    setUserMenu(userMenu: IMenuResponse[]) {
+      this.userMenu = userMenu
     },
 
     async accountLogin(req: IAccount) {
@@ -32,12 +41,33 @@ export default defineStore('user', {
       // 2. 请求用户数据
       const userinfoRes = await getUserinfoById(id)
       const userinfo = userinfoRes.data
+      storage.set('userInfo', userinfo)
       this.setUserInfo(userinfo)
 
       // 3. 请求用户菜单
       const roleId = userinfo.role.id
       const menuRes = await getUserMenuByRoleId(roleId)
-      console.log(menuRes)
+      const menu = menuRes.data
+      storage.set('userMenus', menu)
+      this.setUserMenu(menu)
+
+      router.push('/main')
+    },
+
+    loadLocalLogin() {
+      const token: string = storage.get('token')
+      if (token) {
+        this.setToken(token)
+      }
+      const userInfo: IUserInfoResponse = storage.get('userInfo')
+      if (userInfo) {
+        this.setUserInfo(userInfo)
+      }
+
+      const userMenus: IMenuResponse[] = storage.get('userMenus')
+      if (userMenus) {
+        this.setUserMenu(userMenus)
+      }
     }
   }
 })

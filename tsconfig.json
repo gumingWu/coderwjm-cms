@@ -23,6 +23,6 @@
     "src/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx"
-  ],
+, "src/components/LabelInput/index.jsx"  ],
   "exclude": ["node_modules"]
 }

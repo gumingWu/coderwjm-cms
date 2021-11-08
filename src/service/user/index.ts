@@ -20,7 +20,7 @@ export const getUserinfoById = (id: number) => {
 }
 
 export const getUserMenuByRoleId = (roleId: number) => {
-  return request.get<IDataType>(`/role/${roleId}/menu`, {
+  return request.get<IDataType<IMenuResponse[]>>(`/role/${roleId}/menu`, {
     showLoading: false
   })
 }
