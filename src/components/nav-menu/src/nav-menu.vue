@@ -2,9 +2,10 @@
   <div class="nav-menu">
     <div class="logo">
       <img class="img" src="~@/assets/img/logo.svg" alt="logo" />
-      <span class="title">Vue3 + Ts</span>
+      <span v-if="!collapse" class="title">Vue3 + Ts</span>
     </div>
     <el-menu
+      :collapse="collapse"
       background-color="#0c2135"
       text-color="#b7bdc3"
       active-text-color="#0a60bd"
@@ -40,12 +41,17 @@
 </template>
 
 <script setup lang="ts">
-import { toRaw } from 'vue'
+import { toRaw, toRefs, defineProps } from 'vue'
 import userStore from '@/store/modules/user'
 
 const user = userStore()
 const userMenus = toRaw(user.userMenu) // 去除响应式
-console.log(userMenus)
+
+const props = defineProps({
+  collapse: Boolean
+})
+
+const { collapse } = toRefs(props)
 </script>
 
 <style lang="less" scoped>
