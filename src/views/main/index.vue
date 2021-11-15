@@ -1,7 +1,9 @@
 <template>
   <div class="main">
     <el-container class="main-content">
-      <el-aside> im aside </el-aside>
+      <el-aside>
+        <nav-menu></nav-menu>
+      </el-aside>
       <el-container class="page">
         <el-header class="page-header"> im header </el-header>
         <el-main class="page-content">
@@ -12,7 +14,9 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import NavMenu from '@/components/nav-menu'
+</script>
 
 <style scoped lang="less">
 @header-height: 48px;
