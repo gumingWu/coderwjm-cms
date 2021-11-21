@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "esbuild --bundle ./src/bin.js --format=cjs --platform=node --outfile=./lib/bin.js --external:esbuild --minify-whitespace --watch",
     "build": "esbuild --bundle ./src/bin.js --format=cjs --platform=node --outfile=./lib/bin.js --external:esbuild --minify-whitespace"
   },
   "keywords": [],
@@ -11,6 +12,8 @@
   "license": "ISC",
   "devDependencies": {
     "commander": "^8.3.0",
-    "esbuild": "^0.13.14"
+    "esbuild": "^0.13.14",
+    "kolorist": "^1.5.0",
+    "prompts": "^2.4.2"
   }
 }

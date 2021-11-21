@@ -5,7 +5,7 @@ import { onCreate } from './commands/create'
 const program = new Command()
 
 program
-  .command('create [name...]')
+  .command('create')
   .option('-t --type <type>', 'select create type')
   .description('create a views, or a route, or a pinia module')
   .action(onCreate)
