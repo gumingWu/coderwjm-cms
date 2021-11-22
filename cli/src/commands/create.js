@@ -54,10 +54,6 @@ export async function onCreate(cmd) {
   )
   path = result2.path
 
-  logger.success(type)
-  logger.success(name)
-  logger.success(path)
-
   createFile({
     type, name, path
   })

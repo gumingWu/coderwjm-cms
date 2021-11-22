@@ -5,7 +5,7 @@ export default genViewsTemplate = (name) => {
   <div class="${name}-container"></div>
 </template>
 
-<script>
+<script lang="ts>
 import { defineComponent } from 'vue'
 export default defineComponent({
   name: '${bigCamelCase(name)}'

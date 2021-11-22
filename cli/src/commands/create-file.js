@@ -1,15 +1,17 @@
 import { resolve } from 'path'
 import { mkdirSync, writeFileSync } from 'fs-extra'
 import logger from "../shared/logger"
-import genViewsTemplate from '../templates/views'
+import genViewsTemplate from '../templates/createViews'
+import { genComponentsIndexTemplate, genComponentsVueTemplate } from '../templates/createComponents'
 
+const MKDIR_FILE_OPTIONS = { recursive: true }
 const WRITE_FILE_OPTIONS = { encoding: 'utf-8' }
 
 export default ({type, name, path}) => {
   const fileDir = resolve(path)
   logger.info(fileDir)
 
-  mkdirSync(fileDir, {recursive: true})
+  mkdirSync(fileDir, MKDIR_FILE_OPTIONS)
 
   let filePath = ''
   switch(type) {
@@ -18,6 +20,13 @@ export default ({type, name, path}) => {
       writeFileSync(filePath, genViewsTemplate(name), WRITE_FILE_OPTIONS)
       break;
     case 'components':
+      filePath = `${resolve(fileDir, 'index')}.ts`
+      const cpnSrcDir = resolve(fileDir, 'src')
+      const cpnVueDir = `${resolve(cpnSrcDir, name)}.vue`
+
+      mkdirSync(cpnSrcDir, MKDIR_FILE_OPTIONS)
+      writeFileSync(filePath, genComponentsIndexTemplate(name, fileDir), WRITE_FILE_OPTIONS)
+      writeFileSync(cpnVueDir, genComponentsVueTemplate(name), WRITE_FILE_OPTIONS)
       break;
     case 'router':
       break;
