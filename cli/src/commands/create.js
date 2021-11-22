@@ -1,6 +1,7 @@
 import prompts from 'prompts'
 import logger from '../shared/logger'
 import { onPromptsCancel } from '../shared/utils'
+import createFile from './create-file'
 import { isEmpty, validPath } from '../shared/validate'
 
 const CREATE_TYPES = ['views', 'components', 'router', 'pinia']
@@ -42,7 +43,7 @@ export async function onCreate(cmd) {
       {
         name: 'path',
         type: 'text',
-        message: 'Please makesure the path',
+        message: 'Please makesure the path(click Tab to edit the path)',
         initial: `src/${type}/${name}`,
         validate: (e) => validPath(e, type)
       }
@@ -56,4 +57,8 @@ export async function onCreate(cmd) {
   logger.success(type)
   logger.success(name)
   logger.success(path)
+
+  createFile({
+    type, name, path
+  })
 }
