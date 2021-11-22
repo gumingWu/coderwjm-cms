@@ -1,6 +1,7 @@
 import { resolve } from 'path'
 import { mkdirSync, writeFileSync } from 'fs-extra'
 import logger from "../shared/logger"
+import genViewsTemplate from '../templates/views'
 
 const WRITE_FILE_OPTIONS = { encoding: 'utf-8' }
 
@@ -14,7 +15,7 @@ export default ({type, name, path}) => {
   switch(type) {
     case 'views':
       filePath = `${resolve(fileDir, 'index')}.vue`
-      writeFileSync(filePath, 'hi', WRITE_FILE_OPTIONS)
+      writeFileSync(filePath, genViewsTemplate(name), WRITE_FILE_OPTIONS)
       break;
     case 'components':
       break;
