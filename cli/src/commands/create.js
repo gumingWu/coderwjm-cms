@@ -74,9 +74,9 @@ export async function onCreate(cmd) {
         initial: routePath
       }
     ])
-    createRoute(routePath, path)
+    createRoute(routePath, name, path)
   }
-  // createFile({
-  //   type, name, path
-  // })
+  createFile({
+    type, name, path
+  })
 }

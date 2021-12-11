@@ -24,6 +24,7 @@ const handleFoldClick = (): void => {
 .nav-header {
   .fold-menu {
     font-size: 24px;
+    cursor: pointer;
   }
 }
 </style>

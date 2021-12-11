@@ -3,9 +3,7 @@ import { mkdirSync, writeFileSync } from 'fs-extra'
 import logger from "../shared/logger"
 import genViewsTemplate from '../templates/createViews'
 import { genComponentsIndexTemplate, genComponentsVueTemplate } from '../templates/createComponents'
-
-const MKDIR_FILE_OPTIONS = { recursive: true }
-const WRITE_FILE_OPTIONS = { encoding: 'utf-8' }
+import { MKDIR_FILE_OPTIONS, WRITE_FILE_OPTIONS } from '../shared/constant'
 
 export default ({type, name, path}) => {
   const fileDir = resolve(path)
