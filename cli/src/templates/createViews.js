@@ -1,11 +1,11 @@
-import { bigCamelCase } from "../shared/utils"
+import { bigCamelCase } from '../shared/utils'
 
 export default genViewsTemplate = (name) => {
   return `<template>
   <div class="${name}-container"></div>
 </template>
 
-<script lang="ts>
+<script lang="ts">
 import { defineComponent } from 'vue'
 export default defineComponent({
   name: '${bigCamelCase(name)}'

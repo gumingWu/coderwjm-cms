@@ -2,16 +2,18 @@ import prompts from 'prompts'
 import logger from '../shared/logger'
 import { onPromptsCancel } from '../shared/utils'
 import createFile from './create-file'
-import { isEmpty, validPath } from '../shared/validate'
+import { createRoute } from './create-route'
+import { isEmpty, validPath, validNeedRoute } from '../shared/validate'
 
 const CREATE_TYPES = ['views', 'components', 'router', 'pinia']
 
 let type = ''
 let name = ''
 let path = ''
+let needRoute = ''
 
 export async function onCreate(cmd) {
-  const result1 = await prompts(
+  const step1 = await prompts(
     [
       {
         name: 'type',
@@ -35,10 +37,10 @@ export async function onCreate(cmd) {
       onCancel: onPromptsCancel
     }
   )
-  type = result1.type
-  name = result1.name
+  type = step1.type
+  name = step1.name
 
-  const result2 = await prompts(
+  const step2 = await prompts(
     [
       {
         name: 'path',
@@ -46,15 +48,35 @@ export async function onCreate(cmd) {
         message: 'Please makesure the path(click Tab to edit the path)',
         initial: `src/${type}/${name}`,
         validate: (e) => validPath(e, type)
+      },
+      {
+        name: 'needRoute',
+        type: 'text',
+        message: 'do u need to create route?(y/n)',
+        initial: 'y',
+        validate: (e) => validNeedRoute(e)
       }
     ],
     {
       onCancel: onPromptsCancel
     }
   )
-  path = result2.path
+  path = step2.path
+  needRoute = step2.needRoute
 
-  createFile({
-    type, name, path
-  })
+  if (needRoute === 'y') {
+    const routePath = path.replace('views', 'router')
+    const step3 = await prompts([
+      {
+        name: 'routePath',
+        type: 'text',
+        message: 'enter your route path',
+        initial: routePath
+      }
+    ])
+    createRoute(routePath, path)
+  }
+  // createFile({
+  //   type, name, path
+  // })
 }

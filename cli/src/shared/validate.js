@@ -7,3 +7,7 @@ export function isEmpty(e) {
 export function validPath(e, type) {
   return e.startsWith(`src/${type}`)
 }
+
+export function validNeedRoute(e) {
+  return ['y', 'n'].includes(e)
+}
