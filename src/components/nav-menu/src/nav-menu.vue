@@ -21,7 +21,10 @@
             </template>
             <!-- 二级菜单的子菜单 -->
             <template v-for="subitem in item.children" :key="subitem.id">
-              <el-menu-item :index="'' + subitem.id">
+              <el-menu-item
+                :index="'' + subitem.id"
+                @click="handleMenuItemClick(subitem)"
+              >
                 <i v-if="subitem.icon" :class="subitem.icon"></i>
                 <span>{{ subitem.name }}</span>
               </el-menu-item>
@@ -30,7 +33,7 @@
         </template>
 
         <template v-else>
-          <el-menu-item :index="item.id">
+          <el-menu-item :index="item.id" @click="handleMenuItemClick(item)">
             <i v-if="item.icon" :class="item.icon"></i>
             <span>{{ item.name }}</span>
           </el-menu-item>
@@ -43,6 +46,7 @@
 <script setup lang="ts">
 import { toRaw, toRefs, defineProps } from 'vue'
 import userStore from '@/store/modules/user'
+import { useRouter, useRoute } from 'vue-router'
 
 const user = userStore()
 const userMenus = toRaw(user.userMenu) // 去除响应式
@@ -50,6 +54,15 @@ const userMenus = toRaw(user.userMenu) // 去除响应式
 const props = defineProps({
   collapse: Boolean
 })
+
+const router = useRouter()
+console.log(router)
+
+const handleMenuItemClick = (item: any) => {
+  router.push({
+    path: item.url ?? '/not-found'
+  })
+}
 
 const { collapse } = toRefs(props)
 </script>

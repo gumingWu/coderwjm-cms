@@ -9,6 +9,6 @@ export const genRouterTemplate = (routePath, viewName, viewPath) => {
   return `export default {
 name: '${viewName}',
 path: '${genRoutePath(routePath)}',
-component: import('${genViewPath(viewPath)}/index.vue')
+component: () => import('${genViewPath(viewPath)}/index.vue')
 }`
 }

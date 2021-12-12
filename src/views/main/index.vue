@@ -9,7 +9,9 @@
           <nav-header @foldChange="handleFoldChange"></nav-header>
         </el-header>
         <el-main class="page-content">
-          <div class="page-info">im content</div>
+          <div class="page-info">
+            <router-view />
+          </div>
         </el-main>
       </el-container>
     </el-container>

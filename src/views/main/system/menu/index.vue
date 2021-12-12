@@ -1,5 +1,5 @@
 <template>
-  <div class="menu-container"></div>
+  <div class="menu-container">menu</div>
 </template>
 
 <script lang="ts">
@@ -17,4 +17,3 @@ import { ref } from 'vue'
 .menu-container {
 }
 </style>
-  

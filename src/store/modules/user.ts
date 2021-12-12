@@ -11,6 +11,7 @@ import type {
 import { defineStore } from 'pinia'
 import router from '@/router'
 import storage from '@/utils/storage'
+import { mapMenusToRoutes } from '@/utils/map-menus'
 
 export default defineStore('user', {
   state: () => {
@@ -29,6 +30,13 @@ export default defineStore('user', {
     },
     setUserMenu(userMenu: IMenuResponse[]) {
       this.userMenu = userMenu
+
+      const routes = mapMenusToRoutes(userMenu)
+      console.log(routes)
+
+      routes.forEach((route) => {
+        router.addRoute('main', route)
+      })
     },
 
     async accountLogin(req: IAccount) {
