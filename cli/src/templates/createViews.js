@@ -2,7 +2,7 @@ import { bigCamelCase } from '../shared/utils'
 
 export default genViewsTemplate = (name) => {
   return `<template>
-  <div class="${name}-container"></div>
+  <div class="${name}-container">${name}</div>
 </template>
 
 <script lang="ts">

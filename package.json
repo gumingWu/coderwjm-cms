@@ -12,7 +12,8 @@
     "prettier": "prettier --write .",
     "prepare": "husky install",
     "commit": "cz",
-    "cli": "node ./cli/lib/bin.js"
+    "cli": "node ./cli/lib/bin.js",
+    "create": "npm run cli create"
   },
   "dependencies": {
     "core-js": "^3.6.5",
