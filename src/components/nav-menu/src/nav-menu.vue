@@ -5,6 +5,7 @@
       <span v-if="!collapse" class="title">Vue3 + Ts</span>
     </div>
     <el-menu
+      :default-active="defaultMenu"
       :collapse="collapse"
       background-color="#0c2135"
       text-color="#b7bdc3"
@@ -47,6 +48,7 @@
 import { toRaw, toRefs, defineProps } from 'vue'
 import userStore from '@/store/modules/user'
 import { useRouter, useRoute } from 'vue-router'
+import { pathMapToMenu } from '@/utils/map-menus'
 
 const user = userStore()
 const userMenus = toRaw(user.userMenu) // 去除响应式
@@ -56,7 +58,7 @@ const props = defineProps({
 })
 
 const router = useRouter()
-console.log(router)
+const route = useRoute()
 
 const handleMenuItemClick = (item: any) => {
   router.push({
@@ -64,7 +66,11 @@ const handleMenuItemClick = (item: any) => {
   })
 }
 
+// 菜单展开/收缩
 const { collapse } = toRefs(props)
+
+// 当前菜单
+const defaultMenu: string = pathMapToMenu(userMenus, route.path)
 </script>
 
 <style lang="less" scoped>

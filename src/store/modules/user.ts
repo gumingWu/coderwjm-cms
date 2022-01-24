@@ -32,7 +32,6 @@ export default defineStore('user', {
       this.userMenu = userMenu
 
       const routes = mapMenusToRoutes(userMenu)
-      console.log(routes)
 
       routes.forEach((route) => {
         router.addRoute('main', route)

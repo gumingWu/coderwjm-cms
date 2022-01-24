@@ -1,4 +1,5 @@
 import type { RouteRecordRaw } from 'vue-router'
+import { menuRouteType } from '@/router/type'
 
 export function mapMenusToRoutes(userMenus: any[]): RouteRecordRaw[] {
   const routes: RouteRecordRaw[] = []
@@ -10,10 +11,6 @@ export function mapMenusToRoutes(userMenus: any[]): RouteRecordRaw[] {
     const route = require('../router/main' + key.split('.')[1])
     allRoutes.push(route.default)
   })
-  console.log(
-    '🚀 ~ file: map-menus.ts ~ line 16 ~ routeFiles.keys ~ allRoutes',
-    allRoutes
-  )
 
   // 2. 根据菜单获取需要添加的routes
   const _recurseGetRoute = (menus: any[]) => {
@@ -31,4 +28,21 @@ export function mapMenusToRoutes(userMenus: any[]): RouteRecordRaw[] {
   _recurseGetRoute(userMenus)
 
   return routes
+}
+
+export const pathMapToMenu = (
+  userMenus: any[],
+  currentPath: string
+): string => {
+  const matchParentRoute = userMenus.find((item) =>
+    currentPath.startsWith(item.url)
+  )
+  if (matchParentRoute) {
+    const matchRoute = matchParentRoute.children.find(
+      (item: menuRouteType) => item.url === currentPath
+    )
+    return matchRoute.id + ''
+  }
+
+  return 'a'
 }

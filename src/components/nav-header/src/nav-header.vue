@@ -5,6 +5,10 @@
       :class="isFold ? 'el-icon-s-unfold' : 'el-icon-s-fold'"
       @click="handleFoldClick"
     ></i>
+    <div class="content">
+      <div>面包屑</div>
+      <div>用户信息</div>
+    </div>
   </div>
 </template>
 
@@ -22,9 +26,19 @@ const handleFoldClick = (): void => {
 
 <style scoped lang="less">
 .nav-header {
+  display: flex;
+  width: 100%;
   .fold-menu {
     font-size: 24px;
     cursor: pointer;
+  }
+
+  .content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+    padding: 0 20px;
   }
 }
 </style>

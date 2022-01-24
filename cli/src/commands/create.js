@@ -53,7 +53,7 @@ export async function onCreate(cmd) {
         name: 'needRoute',
         type: 'text',
         message: 'do u need to create route?(y/n)',
-        initial: 'y',
+        initial: type === 'views' ? 'y' : 'n',
         validate: (e) => validNeedRoute(e)
       }
     ],
@@ -77,6 +77,8 @@ export async function onCreate(cmd) {
     createRoute(routePath, name, path)
   }
   createFile({
-    type, name, path
+    type,
+    name,
+    path
   })
 }
