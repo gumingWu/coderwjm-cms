@@ -17,7 +17,7 @@ export default defineStore('user', {
   state: () => {
     return {
       token: '',
-      userInfo: {},
+      userInfo: {} as IUserInfoResponse,
       userMenu: [] as any[] // ts默认初始化空数组为never[]，所以要转换成any[]
     }
   },

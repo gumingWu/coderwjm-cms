@@ -12,6 +12,7 @@
             v-model="form.password"
             placeholder="请输入密码"
             show-password
+            @change="loginBtn"
           ></el-input>
         </el-form-item>
         <el-checkbox v-model="isSavePwd" label="记住密码"></el-checkbox>
