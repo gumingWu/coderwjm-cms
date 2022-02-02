@@ -1,4 +1,4 @@
-import { bigCamelCase } from "../shared/utils"
+import { bigCamelCase } from '../shared/utils'
 export const genComponentsIndexTemplate = (comName) => {
   const camelName = bigCamelCase(comName)
   return `import ${camelName} from './src/${comName}.vue'
@@ -9,7 +9,7 @@ export default ${camelName}
 
 export const genComponentsVueTemplate = (name) => {
   return `<template>
-  <div class="${name}-container"></div>
+  <div class="${name}-container">${name}</div>
 </template>
 
 <script lang="ts">
@@ -23,8 +23,8 @@ export default defineComponent({
 <script setup lang="ts">
 import { defineProps, defineEmits } from 'vue'
 
-const props = defineProps({})
-const emits = defineEmits([])
+// const props = defineProps({})
+// const emits = defineEmits([])
 </script>
 
 <style scoped lang="less">

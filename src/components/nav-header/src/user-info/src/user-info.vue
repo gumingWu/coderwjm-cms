@@ -31,7 +31,7 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue'
+import { defineProps, defineEmits, computed } from 'vue'
 import { ArrowDown } from '@element-plus/icons'
 import useUserStore from '@/store/modules/user'
 import storage from '@/utils/storage'
@@ -40,7 +40,7 @@ import { useRouter } from 'vue-router'
 // const props = defineProps({})
 // const emits = defineEmits([])
 const userStore = useUserStore()
-const name = userStore.userInfo.name
+const name = computed(() => userStore.userInfo.name)
 
 const router = useRouter()
 const handleLogout = () => {

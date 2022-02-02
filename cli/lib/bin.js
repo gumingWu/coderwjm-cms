@@ -80,7 +80,7 @@ import { ref } from 'vue'
 
 export default ${camelName}
 `};var genComponentsVueTemplate=name2=>{return`<template>
-  <div class="${name2}-container"></div>
+  <div class="${name2}-container">${name2}</div>
 </template>
 
 <script lang="ts">
@@ -94,8 +94,8 @@ export default defineComponent({
 <script setup lang="ts">
 import { defineProps, defineEmits } from 'vue'
 
-const props = defineProps({})
-const emits = defineEmits([])
+// const props = defineProps({})
+// const emits = defineEmits([])
 <\/script>
 
 <style scoped lang="less">
