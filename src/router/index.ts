@@ -1,10 +1,11 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import storage from '@/utils/storage'
+import useUserStore from '@/store/modules/user'
 
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    redirect: '/login'
+    redirect: '/main'
   },
   {
     path: '/login',
@@ -23,6 +24,19 @@ const routes: RouteRecordRaw[] = [
   }
 ]
 
+const findFirstRoute = () => {
+  const userStore = useUserStore()
+  const menus = userStore.userMenu
+  if (menus.length === 0) {
+    return '/login'
+  }
+  const firstMenus = menus[0]
+  if (firstMenus.type === 1) {
+    const firstMenusChild = firstMenus.children[0]
+    return firstMenusChild.url
+  }
+}
+
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
@@ -34,6 +48,10 @@ router.beforeEach((to) => {
     if (!token) {
       return '/login'
     }
+  }
+
+  if (to.path === '/main') {
+    return findFirstRoute()
   }
 })
 
