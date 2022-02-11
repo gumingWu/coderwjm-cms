@@ -8,6 +8,7 @@ export interface IForm {
 export interface IFormItem {
   type: IFormType
   label: string
+  field: string
   rules?: any[]
   placeholder?: string
   // 针对select的选项

@@ -1,5 +1,8 @@
 <template>
   <div class="w-form-container">
+    <div class="header">
+      <slot name="header"></slot>
+    </div>
     <el-form :label-width="labelWidth">
       <el-row>
         <template v-for="item in formItems" :key="item.label">
@@ -9,13 +12,19 @@
                 v-if="item.type === 'input' || item.type === 'password'"
               >
                 <el-input
+                  :model-value="modelValue[item.field]"
                   :type="item.type"
                   :show-password="item.type === 'password'"
                   :placeholder="item.placeholder"
+                  @update:modelValue="handleValueChange($event, item.field)"
                 ></el-input>
               </template>
               <template v-if="item.type === 'select'">
-                <el-select style="width: 100%">
+                <el-select
+                  style="width: 100%"
+                  :model-value="modelValue[item.field]"
+                  @update:modelValue="handleValueChange($event, item.field)"
+                >
                   <el-option
                     v-for="option in item.options"
                     :key="option.title"
@@ -26,8 +35,10 @@
               </template>
               <template v-if="item.type === 'datepicker'">
                 <el-date-picker
+                  :model-value="modelValue[item.field]"
                   style="width: 100%"
                   v-bind="item.otherOptions"
+                  @update:modelValue="handleValueChange($event, item.field)"
                 ></el-date-picker>
               </template>
             </el-form-item>
@@ -35,6 +46,9 @@
         </template>
       </el-row>
     </el-form>
+    <div class="footer">
+      <slot name="footer"></slot>
+    </div>
   </div>
 </template>
 
@@ -51,6 +65,10 @@ import { defineProps, defineEmits, PropType } from 'vue'
 import { IFormItem } from './type'
 
 const props = defineProps({
+  modelValue: {
+    type: Object,
+    required: true
+  },
   formItems: {
     type: Array as PropType<IFormItem[]>,
     default: () => []
@@ -76,8 +94,11 @@ const props = defineProps({
     })
   }
 })
+const emits = defineEmits(['update:modelValue'])
 
-// const emits = defineEmits([])
+const handleValueChange = (value: any, field: any) => {
+  emits('update:modelValue', { ...props.modelValue, [field]: value })
+}
 </script>
 
 <style scoped lang="less">
