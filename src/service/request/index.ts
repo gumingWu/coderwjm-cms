@@ -2,14 +2,13 @@ import axios from 'axios'
 import type { AxiosInstance, Method } from 'axios'
 import type { RequestConfig } from './type'
 import { ElLoading } from 'element-plus'
-import type { ILoadingInstance } from 'element-plus'
 const { VUE_APP_SHOWLOADING } = process.env
 import storage from '@/utils/storage'
 
 class Request {
   instance: AxiosInstance
   showLoading: boolean
-  loading?: ILoadingInstance
+  loading?: any
 
   constructor(config: RequestConfig) {
     this.instance = axios.create(config)

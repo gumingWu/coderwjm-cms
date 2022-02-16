@@ -7,7 +7,10 @@
     ></i>
     <div class="content">
       <nav-breadcrumb :breadcrumb="breadcrumb"></nav-breadcrumb>
-      <user-info></user-info>
+      <div class="content-right">
+        <nav-darkmode class="content-right-switch"></nav-darkmode>
+        <user-info></user-info>
+      </div>
     </div>
   </div>
 </template>
@@ -16,6 +19,7 @@
 import { ref, defineEmits, computed } from 'vue'
 import NavBreadcrumb from './nav-breadcrumb'
 import UserInfo from './user-info'
+import NavDarkmode from './nav-darkmode'
 import { IBreadcrumb } from './nav-breadcrumb'
 import useUserStore from '@/store/modules/user'
 import { useRoute } from 'vue-router'
@@ -55,6 +59,15 @@ const breadcrumb = computed(() => {
     align-items: center;
     flex: 1;
     padding: 0 20px;
+
+    .content-right {
+      display: flex;
+      align-items: center;
+
+      &-switch {
+        margin: 0 6px;
+      }
+    }
   }
 }
 </style>
