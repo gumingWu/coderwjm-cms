@@ -3,7 +3,6 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import userStore from '@/store/modules/user'
-import 'element-plus/theme-chalk/index.css'
 import 'normalize.css'
 
 function setupStore(): void {

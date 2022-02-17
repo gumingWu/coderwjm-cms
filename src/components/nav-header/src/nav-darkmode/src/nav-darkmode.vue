@@ -22,6 +22,7 @@ export default defineComponent({
 import { defineProps, defineEmits, ref } from 'vue'
 import useSystemStore from '@/store/modules/system'
 import { Sunny, Moon } from '@element-plus/icons-vue'
+import { changeStyleMode } from '../hooks/useStyleModeChange'
 
 // const props = defineProps({})
 // const emits = defineEmits([])
@@ -30,6 +31,7 @@ const systemStore = useSystemStore()
 const darkMode = ref(systemStore.darkMode)
 const handleChange = (val: boolean) => {
   systemStore.changeDarkMode(val)
+  changeStyleMode(val)
 }
 </script>
 

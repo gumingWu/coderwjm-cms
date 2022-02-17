@@ -55,6 +55,10 @@ const handleLogout = () => {
 .user-info-container {
 }
 
+.el-dropdown-menu {
+  background-color: var(--header-dropdown-bg-color);
+}
+
 .el-dropdown-link {
   display: flex;
   align-items: center;

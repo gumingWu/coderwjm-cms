@@ -69,6 +69,15 @@ const handleFoldChange = (val: boolean) => {
   background-color: #f0f2f5;
 }
 
+.page-header {
+  background-color: var(--header-bg-color);
+  transition: all 0.3s;
+
+  .el-dropdown-menu {
+    background-color: var(--header-dropdown-bg-color) !important;
+  }
+}
+
 .page-content {
   height: calc(100% - @header-height);
 
