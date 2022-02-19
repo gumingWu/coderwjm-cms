@@ -52,6 +52,7 @@ import { pathMapToMenu } from '@/utils/map-menus'
 
 const user = userStore()
 const userMenus = toRaw(user.userMenu) // 去除响应式
+console.log(userMenus)
 
 const props = defineProps({
   collapse: Boolean

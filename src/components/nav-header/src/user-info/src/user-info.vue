@@ -12,7 +12,7 @@
     </span>
     <template #dropdown>
       <el-dropdown-menu>
-        <el-dropdown-item icon="el-icon-circle-close" @click="handleLogout"
+        <el-dropdown-item :icon="CircleClose" @click="handleLogout"
           >退出登录</el-dropdown-item
         >
         <el-dropdown-item divided>用户信息</el-dropdown-item>
@@ -36,6 +36,7 @@ import { ArrowDown } from '@element-plus/icons'
 import useUserStore from '@/store/modules/user'
 import storage from '@/utils/storage'
 import { useRouter } from 'vue-router'
+import { CircleClose } from '@element-plus/icons' // 现在elementplus的图标都要这样引入
 
 // const props = defineProps({})
 // const emits = defineEmits([])

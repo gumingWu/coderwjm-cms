@@ -1,10 +1,14 @@
 <template>
   <div class="nav-header">
-    <i
+    <!-- <i
       class="fold-menu"
       :class="isFold ? 'el-icon-s-unfold' : 'el-icon-s-fold'"
       @click="handleFoldClick"
-    ></i>
+    ></i> -->
+    <div class="fold-menu" @click="handleFoldClick">
+      <expand v-if="isFold"></expand>
+      <fold v-else></fold>
+    </div>
     <div class="content">
       <nav-breadcrumb :breadcrumb="breadcrumb"></nav-breadcrumb>
       <div class="content-right">
@@ -17,6 +21,7 @@
 
 <script setup lang="ts">
 import { ref, defineEmits, computed } from 'vue'
+import { Fold, Expand } from '@element-plus/icons'
 import NavBreadcrumb from './nav-breadcrumb'
 import UserInfo from './user-info'
 import NavDarkmode from './nav-darkmode'
@@ -47,9 +52,10 @@ const breadcrumb = computed(() => {
 <style scoped lang="less">
 .nav-header {
   display: flex;
+  align-items: center;
   width: 100%;
   .fold-menu {
-    font-size: 24px;
+    width: 24px;
     cursor: pointer;
   }
 
