@@ -57,7 +57,7 @@ const handleLogout = () => {
 }
 
 .el-dropdown-menu {
-  background-color: var(--header-dropdown-bg-color);
+  background-color: var(--darkmode-bg-color);
 }
 
 .el-dropdown-link {

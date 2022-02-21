@@ -102,7 +102,10 @@ const handleValueChange = (value: any, field: any) => {
 </script>
 
 <style scoped lang="less">
+@import '~@/assets/style/darkmode.less';
 .w-form-container {
+  .dynamic-darkmode-card-bg-mixin();
+  .dynamic-darkmode-transition-mixin();
   padding-top: 20px;
 }
 </style>

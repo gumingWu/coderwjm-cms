@@ -30,6 +30,7 @@ const handleFoldChange = (val: boolean) => {
 </script>
 
 <style scoped lang="less">
+@import '~@/assets/style/darkmode.less';
 @header-height: 48px;
 
 .main,
@@ -66,15 +67,15 @@ const handleFoldChange = (val: boolean) => {
 .el-main {
   color: #333;
   text-align: center;
-  background-color: #f0f2f5;
+  .dynamic-darkmode-bg-mixin();
 }
 
 .page-header {
-  background-color: var(--header-bg-color);
-  transition: all 0.3s;
+  .dynamic-darkmode-card-bg-mixin();
+  .dynamic-darkmode-transition-mixin();
 
   .el-dropdown-menu {
-    background-color: var(--header-dropdown-bg-color) !important;
+    background-color: var(--darkmode-bg-color) !important;
   }
 }
 

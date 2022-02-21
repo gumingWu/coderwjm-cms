@@ -1,13 +1,13 @@
 const style = {
   light: {
-    '--header-bg-color': '#fff',
     '--el-text-color-regular': '#606266',
-    '--header-dropdown-bg-color': '#fff'
+    '--darkmode-bg-color': '#f0f2f5',
+    '--darkmode-card-bg-color': '#fff'
   },
   dark: {
-    '--header-bg-color': '#1a1a1a',
     '--el-text-color-regular': 'white',
-    '--header-dropdown-bg-color': '#1a1a1a'
+    '--darkmode-bg-color': '#1a1a1a',
+    '--darkmode-card-bg-color': '#242424'
   }
 }
 

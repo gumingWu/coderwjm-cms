@@ -50,11 +50,13 @@ const breadcrumb = computed(() => {
 </script>
 
 <style scoped lang="less">
+@import '~@/assets/style/darkmode.less';
 .nav-header {
   display: flex;
   align-items: center;
   width: 100%;
   .fold-menu {
+    .dynamic-darkmomde-font-mixin();
     width: 24px;
     cursor: pointer;
   }
