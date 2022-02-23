@@ -1,6 +1,6 @@
 import prompts from 'prompts'
 import logger from '../shared/logger'
-import { onPromptsCancel } from '../shared/utils'
+import { onPromptsCancel, pluginIsInstalled } from '../shared/utils'
 import createFile from './create-file'
 import { createRoute } from './create-route'
 import { isEmpty, validPath, validNeedRoute } from '../shared/validate'
@@ -11,6 +11,7 @@ let type = ''
 let name = ''
 let path = ''
 let needRoute = ''
+let useSetupName = ''
 
 export async function onCreate(cmd) {
   const step1 = await prompts(
@@ -64,7 +65,7 @@ export async function onCreate(cmd) {
   path = step2.path
   needRoute = step2.needRoute
 
-  if (needRoute === 'y') {
+  if (needRoute.toLowerCase() === 'y') {
     const routePath = path.replace('views', 'router')
     const step3 = await prompts([
       {
@@ -76,9 +77,21 @@ export async function onCreate(cmd) {
     ])
     createRoute(routePath, name, path)
   }
-  createFile({
-    type,
-    name,
-    path
-  })
+  if (['views', 'components'].includes(type)) {
+    const vueSetupNamePlugin = 'vue-setup-name-plugin'
+    if (pluginIsInstalled(vueSetupNamePlugin)) {
+      const step4 = await prompts([
+        {
+          name: 'useSetupName',
+          type: 'text',
+          message:
+            'u had installed vue-setup-name-plugin, will u need to use setup name syntax?(y/n)',
+          initial: 'y'
+        }
+      ])
+      useSetupName = step4.useSetupName
+    }
+  }
+
+  createFile(type, name, path, useSetupName)
 }
