@@ -89,7 +89,8 @@ const defaultMenu: string = pathMapToMenu(userMenus, route.path)
     align-items: center;
 
     .img {
-      height: 100%;
+      height: 28px;
+      width: 28px;
       margin: 0 10px;
     }
 

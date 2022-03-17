@@ -2,6 +2,7 @@
   <el-dropdown class="user-info-container">
     <span class="el-dropdown-link">
       <el-avatar
+        class="avatar"
         size="small"
         src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
       ></el-avatar>
@@ -63,6 +64,13 @@ const handleLogout = () => {
 .el-dropdown-link {
   display: flex;
   align-items: center;
+
+  .avatar {
+    ::v-deep img {
+      width: 24px;
+      height: 24px;
+    }
+  }
 
   .user-info-name {
     margin: 0 5px;
