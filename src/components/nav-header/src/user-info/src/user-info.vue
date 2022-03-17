@@ -54,8 +54,8 @@ const handleLogout = () => {
 </script>
 
 <style scoped lang="less">
-.user-info-container {
-}
+// .user-info-container {
+// }
 
 .el-dropdown-menu {
   background-color: var(--darkmode-bg-color);

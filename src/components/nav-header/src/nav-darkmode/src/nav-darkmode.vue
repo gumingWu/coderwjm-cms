@@ -19,7 +19,7 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import { defineProps, defineEmits, ref } from 'vue'
+import { defineProps, defineEmits, ref, onMounted } from 'vue'
 import useSystemStore from '@/store/modules/system'
 import { Sunny, Moon } from '@element-plus/icons-vue'
 import { changeStyleMode } from '../hooks/useStyleModeChange'
@@ -33,9 +33,14 @@ const handleChange = (val: boolean) => {
   systemStore.changeDarkMode(val)
   changeStyleMode(val)
 }
+
+onMounted(() => {
+  // 挂载时进行白天模式初始化
+  changeStyleMode(false)
+})
 </script>
 
 <style scoped lang="less">
-.nav-darkmode-container {
-}
+// .nav-darkmode-container {
+// }
 </style>
