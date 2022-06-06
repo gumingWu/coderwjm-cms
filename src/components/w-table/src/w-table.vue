@@ -74,7 +74,7 @@ const props = defineProps({
   },
   propList: {
     type: Array as PropType<PropListItem[]>,
-    default: () => []
+    required: true
   },
   page: {
     type: Object as PropType<PageType>,

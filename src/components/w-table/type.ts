@@ -1,5 +1,5 @@
 export type PropListItem = {
-  prop?: string
+  prop: string
   slotName?: string
   row?: number
 }
