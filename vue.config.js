@@ -11,6 +11,7 @@ const smp = new SpeedMeasurePlugin({
 })
 
 module.exports = {
+  publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
   // 配置一
   // configureWebpack: {
   //   resolve: {
